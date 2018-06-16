@@ -15,12 +15,12 @@ text:{
 	default:null
 }
 });
-var to=new todo({
-	text:'cook dinner'
-});
-to.save().then((doc)=>{
-console.log('saved todo',doc)
-},(e)=>{
-	console.log('unable to save todo')
-});
+// var to=new todo({
+// 	text:'cook dinner'
+// });
+// to.save().then((doc)=>{
+// //console.log('saved todo',doc)
+// },(e)=>{
+// //	console.log('unable to save todo')
+// });
 module.exports={todo};

@@ -11,8 +11,8 @@ var t=new user({
 	email:'  me@example.com '
 });
 t.save().then((docs)=>{
- console.log('saved your data',docs);
+ //console.log('saved your data',docs);
 },(e)=>{
-console.log('unable to fetch data');
+//console.log('unable to fetch data');
 });
 module.exports={user};

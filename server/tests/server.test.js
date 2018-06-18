@@ -10,7 +10,8 @@ const todos=[{
 	text:'first test todo'
 },{
 	_id:new ObjectID(),
-	text:'second test todo'
+	text:'second test todo',completed:true,
+	completedAt:12545
 }]
 
 beforeEach((done)=>{
@@ -128,3 +129,40 @@ it('should return 404 if object id is valid',(done)=>{
 	.end(done)
 });
 });
+describe('PATCH/todos/:id',()=>{
+	it('should return todo doc',(done)=>{
+		var hexid=todos[0]._id.toHexString();
+		var text='Hii this from server side';
+		request(app)
+		.patch(`/todos/${hexid}`)
+		.send({
+			completed:true,
+			text
+		})
+		.expect(200)
+   .expect((res)=>{
+     expect(res.body.todo.text).toBe(text);
+     expect(res.body.todo.completed).toBe(true);
+     expect(res.body.todo.completedAt).toBeA('number');
+	})
+	.end(done);
+	});
+
+	 it('it should clear completedAt when todo is completed',(done)=>{
+     var hexid=todos[1]._id.toHexString();
+		var text='This is new';
+		request(app)
+		.patch(`/todos/${hexid}`)
+		.send({
+			completed:false,
+			text
+		})
+		.expect(200)
+   .expect((res)=>{
+     expect(res.body.todo.text).toBe(text);
+     expect(res.body.todo.completed).toBe(false);
+     expect(res.body.todo.completedAt).toNotExist();
+	})
+	.end(done);
+	 });
+	});

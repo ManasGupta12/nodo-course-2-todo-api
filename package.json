@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
-    "test": "mocha server/**/*.test.js --timeout=5000",
+    "test": "SET \"NODE_ENV=test\" && mocha server/**/*.test.js --timeout=5000",
     "test-w": "nodemon --exec \"npm test\""
   },
   "engines": {
@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
     "express": "^4.16.0",
     "lodash": "^4.17.10",
     "mongodb": "^3.0.0",

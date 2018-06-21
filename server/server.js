@@ -15,6 +15,7 @@ var{todo}=require('./models/todo.js');
 
 var{User}=require('./models/user.js');
 
+var{authenticate}=require('./middleware/authenticate');
 
 var app=express();
 const port=process.env.PORT ;
@@ -98,6 +99,11 @@ app.patch('/todos/:id',(req,res)=>{
 	})
 
 	});
+
+
+//signup
+
+
 app.post('/users',(req,res)=>{
   var body=_.pick(req.body,['email','password']);
   var user=new User(body);
@@ -110,6 +116,14 @@ return user.generateAuthToken();
 
 });
 });
+
+
+//private route
+
+app.get('/users/me',authenticate,(req,res)=>{
+	      res.send(req.user);
+});
+
 
 
 app.listen(port,()=>{

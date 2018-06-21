@@ -49,13 +49,24 @@ return  user.save().then(()=>{
  	return token;
  })
 };
+UserSchema.statics.findByToken=function(token){     //model methods
+	var User=this;
+	var decoded;
+	try{
+		decoded=jwt.verify(token,'abc123');
+
+	}catch(e){
+		
+		return Promise.reject();
+		
+	}
+  return User.findOne({
+   '_id':decoded._id,
+    'tokens.token':token,
+    'tokens.access':'auth'
+
+  });
+};
 var User=mongoose.model('user',UserSchema);
-// var t=new user({
-// 	email:'  me@example.com '
-// });
-// t.save().then((docs)=>{
-//  //console.log('saved your data',docs);
-// },(e)=>{
-// //console.log('unable to fetch data');
-// });
+
 module.exports={User};

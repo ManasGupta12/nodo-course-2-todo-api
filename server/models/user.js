@@ -50,6 +50,15 @@ return  user.save().then(()=>{
  	return token;
  })
 };
+UserSchema.methods.removeToken = function (token) {
+  var user = this;
+
+  return User.update({
+    $pull: {
+      tokens: {token}
+    }
+  });
+};
 UserSchema.statics.findByToken=function(token){     //model methods
 	var User=this;
 	var decoded;
@@ -100,6 +109,7 @@ UserSchema.statics.findByCredentials=function(email,password){
          });
 	});
 };
+
 var User=mongoose.model('user',UserSchema);
 
 module.exports={User};

@@ -13,14 +13,12 @@ text:{
 ,completedAt:{
 	type:Number,
 	default:null
+},
+_creator:{
+	type:mongoose.Schema.Types.ObjectId,
+	required:true
+
 }
 });
-// var to=new todo({
-// 	text:'cook dinner'
-// });
-// to.save().then((doc)=>{
-// //console.log('saved todo',doc)
-// },(e)=>{
-// //	console.log('unable to save todo')
-// });
+
 module.exports={todo};
